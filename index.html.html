@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEVN STORE | Premium MLBB Top Up</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00ffcc;
+            --secondary: #00d9ff;
+            --accent: #ff3e60;
+            --dark-bg: #03070c;
+            --card-bg: rgba(20, 26, 39, 0.6);
+            --border: rgba(255, 255, 255, 0.08);
+            --neon-glow: 0 0 20px rgba(0, 255, 204, 0.4);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--dark-bg); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: #ffffff;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 5% 5%, rgba(0, 255, 204, 0.1) 0%, transparent 30%),
+                radial-gradient(circle at 95% 95%, rgba(0, 217, 255, 0.1) 0%, transparent 30%);
+            background-attachment: fixed;
+            line-height: 1.5;
+        }
+
+        /* --- Navbar --- */
+        nav {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(3, 7, 12, 0.8);
+            backdrop-filter: blur(25px);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 6%;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.8rem; font-weight: 900;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
+            letter-spacing: -1.5px; cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .status-badge {
+            display: flex; align-items: center; gap: 8px;
+            background: rgba(0, 255, 204, 0.1);
+            padding: 8px 16px; border-radius: 100px;
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            font-size: 0.75rem; color: var(--primary); font-weight: 800;
+        }
+
+        .dot { width: 10px; height: 10px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 12px var(--primary); animation: pulse-glow 2s infinite; }
+        @keyframes pulse-glow { 0% { opacity: 0.5; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.1); } 100% { opacity: 0.5; transform: scale(0.9); } }
+
+        /* --- Hero --- */
+        .hero { padding: 60px 20px 40px; text-align: center; }
+        .hero h1 { font-size: clamp(2.2rem, 10vw, 4rem); font-weight: 900; line-height: 1; margin-bottom: 20px; letter-spacing: -2px; }
+        .hero span { color: var(--primary); text-shadow: 0 0 20px rgba(0, 255, 204, 0.4); }
+        .hero p { color: #8e9aaf; max-width: 550px; margin: 0 auto; font-size: 1.1rem; }
+
+        /* --- Main Container --- */
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 20px 180px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 30px; 
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            border-radius: 35px; padding: 35px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .step-header { display: flex; align-items: center; gap: 18px; margin-bottom: 30px; }
+        .step-tag {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #03070c; width: 40px; height: 40px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 900; font-size: 1.2rem; transform: rotate(-8deg);
+            box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
+        }
+
+        /* --- Inputs --- */
+        .input-box { width: 100%; }
+        .input-box label { display: block; font-size: 0.9rem; color: #8e9aaf; margin-bottom: 12px; font-weight: 600; padding-left: 5px; }
+        input {
+            width: 100%; background: rgba(0, 0, 0, 0.3); border: 1px solid var(--border);
+            padding: 18px; border-radius: 20px; color: #fff; font-size: 1rem;
+            transition: 0.3s;
+        }
+        input:focus { border-color: var(--primary); outline: none; box-shadow: var(--neon-glow); background: rgba(0, 0, 0, 0.5); }
+
+        /* --- Product Grid --- */
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 18px; }
+        
+        .p-item {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border);
+            padding: 30px 15px; border-radius: 28px; cursor: pointer;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-align: center; position: relative;
+            overflow: hidden;
+        }
+        .p-item:hover { transform: translateY(-8px); border-color: var(--primary); background: rgba(255, 255, 255, 0.05); }
+        .p-item.active { background: rgba(0, 255, 204, 0.12); border: 2px solid var(--primary); box-shadow: var(--neon-glow); }
+
+        .p-item b { display: block; font-size: 1.4rem; margin-bottom: 8px; position: relative; z-index: 1; }
+        .p-item .strike { display: block; font-size: 0.8rem; color: #64748b; text-decoration: line-through; margin-bottom: 2px; }
+        .p-item span { color: var(--primary); font-size: 1.05rem; font-weight: 800; }
+        
+        .promo-label {
+            position: absolute; top: 0; right: 0;
+            background: var(--accent); color: #fff; font-size: 0.65rem;
+            padding: 6px 14px; border-radius: 0 25px 0 20px; font-weight: 900;
+            z-index: 2; text-transform: uppercase;
+        }
+
+        /* --- Payment --- */
+        .method-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; }
+        .m-item {
+            background: rgba(0, 0, 0, 0.2); padding: 22px; border-radius: 22px;
+            border: 1px solid var(--border); cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+            transition: 0.3s;
+        }
+        .m-item.active { border-color: var(--primary); background: rgba(0, 255, 204, 0.08); }
+        .m-circle { width: 22px; height: 22px; border: 2px solid #334155; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .m-item.active .m-circle { border-color: var(--primary); }
+        .m-item.active .m-circle::after { content: ''; width: 10px; height: 10px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); }
+
+        /* --- Bottom Bar --- */
+        .footer-action {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: rgba(3, 7, 12, 0.8); backdrop-filter: blur(30px);
+            padding: 25px 8%; border-top: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center; z-index: 1001;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
+        }
+
+        .total-info h2 { font-size: 2.2rem; color: var(--primary); font-weight: 900; letter-spacing: -1px; }
+
+        .btn-pay {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: #03070c; padding: 20px 60px; border-radius: 22px;
+            font-weight: 900; border: none; cursor: pointer; transition: 0.3s;
+            font-size: 1.1rem; text-transform: uppercase;
+        }
+        .btn-pay:disabled { opacity: 0.1; cursor: not-allowed; filter: grayscale(1); }
+
+        .btn-active { animation: pulse-button 1.5s infinite; }
+        @keyframes pulse-button { 0% { box-shadow: 0 0 0 0 rgba(0, 255, 204, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(0, 255, 204, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 255, 204, 0); } }
+
+        /* --- Modal --- */
+        .overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(15px);
+            z-index: 2000; align-items: center; justify-content: center; padding: 20px;
+        }
+        .modal { 
+            background: #0d121d; border: 1px solid var(--primary); 
+            width: 100%; max-width: 480px; border-radius: 40px; 
+            padding: 40px; animation: modalIn 0.3s ease-out;
+        }
+        @keyframes modalIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .confirm-item { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+        /* --- Admin --- */
+        #adminPanel {
+            display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 90%; max-width: 500px; background: #070c14; border: 2px solid var(--primary);
+            z-index: 3000; padding: 35px; border-radius: 35px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-action { flex-direction: column; gap: 20px; text-align: center; padding: 20px 5%; }
+            .btn-pay { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-logo" id="mainLogo">NEVN STORE</div>
+    <div class="status-badge"><div class="dot"></div> SISTEM OTOMATIS</div>
+</nav>
+
+<header class="hero">
+    <h1>TOP UP <span>MLBB</span></h1>
+    <p>Premium experience, Lightning speed, Guaranteed safety.</p>
+</header>
+
+<div class="container">
+    <div class="card">
+        <div class="step-header"><div class="step-tag">1</div> <h3 class="card-title">Data Akun Player</h3></div>
+        <div style="display: grid; grid-template-columns: 1.6fr 1fr; gap: 15px;">
+            <div class="input-box"><label>User ID</label><input type="number" id="userId" placeholder="ID"></div>
+            <div class="input-box"><label>Zone ID</label><input type="number" id="zoneId" placeholder="Server"></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="step-header"><div class="step-tag">2</div> <h3 class="card-title">Pilih Nominal Diamonds</h3></div>
+        <div class="product-grid" id="productGrid"></div>
+    </div>
+
+    <div class="card">
+        <div class="step-header"><div class="step-tag">3</div> <h3 class="card-title">Pilih Pembayaran</h3></div>
+        <div class="method-grid">
+            <div class="m-item" data-pay="DANA"><span>DANA Official</span><div class="m-circle"></div></div>
+            <div class="m-item" data-pay="GOPAY"><span>GOPAY Instant</span><div class="m-circle"></div></div>
+            <div class="m-item" data-pay="OVO"><span>OVO Wallet</span><div class="m-circle"></div></div>
+            <div class="m-item" data-pay="QRIS"><span>QRIS All Payment</span><div class="m-circle"></div></div>
+        </div>
+    </div>
+</div>
+
+<div class="footer-action">
+    <div class="total-info"><p style="font-size:0.8rem; color:#8e9aaf; font-weight: 700;">TOTAL ESTIMASI</p><h2 id="displayTotal">Rp 0</h2></div>
+    <button class="btn-pay" id="btnBuy" onclick="showModal()" disabled>BELI SEKARANG</button>
+</div>
+
+<div class="overlay" id="overlay">
+    <div class="modal">
+        <h2 style="text-align:center; margin-bottom:25px; font-weight:900;">Verifikasi Order</h2>
+        <div id="confirmData"></div>
+        <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 15px; margin-top: 35px;">
+            <button onclick="closeModal()" style="background:#222; color:#fff; border:none; padding:18px; border-radius:20px; cursor:pointer;">Batal</button>
+            <button onclick="processOrder()" style="background:var(--primary); color:#03070c; border:none; padding:18px; border-radius:20px; font-weight:900; cursor:pointer;">Konfirmasi WA</button>
+        </div>
+    </div>
+</div>
+
+<div id="adminPanel">
+    <h3 style="margin-bottom:20px; color:var(--primary);">Control Panel - Harga</h3>
+    <div id="adminList" style="margin-bottom: 25px; max-height: 300px; overflow-y: auto;"></div>
+    <div style="display:flex; gap:15px;">
+        <button onclick="saveAdmin()" style="flex:1.5; padding:16px; background:var(--primary); border:none; border-radius:15px; font-weight:900;">UPDATE</button>
+        <button onclick="closeAdmin()" style="flex:1; padding:16px; background:#222; color:#fff; border:none; border-radius:15px;">BATAL</button>
+    </div>
+</div>
+
+<script>
+    const WHATSAPP_NUMBER = "6281292243532";
+    const SECRET_PASSWORD = "nevn123";
+
+    let dbDiamond = [
+        {dia: 5, price: 1500, hot: false},
+        {dia: 12, price: 3500, hot: false},
+        {dia: 28, price: 8000, hot: true},
+        {dia: 59, price: 16000, hot: false},
+        {dia: 85, price: 23000, hot: false},
+        {dia: 170, price: 45000, hot: true},
+        {dia: 296, price: 80000, hot: false},
+        {dia: 568, price: 150000, hot: false}
+    ];
+
+    if(localStorage.getItem('nevn_store_v4')) {
+        try {
+            dbDiamond = JSON.parse(localStorage.getItem('nevn_store_v4'));
+        } catch(e) {
+            console.error("Data error, reset to default");
+        }
+    }
+
+    let selProduct = null;
+    let selMethod = null;
+    let adminClicks = 0;
+
+    function init() {
+        const grid = document.getElementById('productGrid');
+        grid.innerHTML = '';
+        dbDiamond.forEach((item, idx) => {
+            const el = document.createElement('div');
+            el.className = 'p-item';
+            if(item.hot) el.innerHTML += `<div class="promo-label">Best Seller</div>`;
+            const fakePrice = Math.ceil((item.price * 1.3) / 1000) * 1000;
+            el.innerHTML += `<b>${item.dia} 💎</b><span class="strike">Rp ${fakePrice.toLocaleString('id-ID')}</span><span>Rp ${item.price.toLocaleString('id-ID')}</span>`;
+            el.onclick = () => {
+                document.querySelectorAll('.p-item').forEach(p => p.classList.remove('active'));
+                el.classList.add('active');
+                selProduct = item;
+                validate(); // Panggil validate tiap klik produk
+            };
+            grid.appendChild(el);
+        });
+
+        document.querySelectorAll('.m-item').forEach(item => {
+            item.onclick = () => {
+                document.querySelectorAll('.m-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                selMethod = item.getAttribute('data-pay');
+                validate(); // Panggil validate tiap klik metode
+            };
+        });
+    }
+
+    function validate() {
+        const uid = document.getElementById('userId').value;
+        const zid = document.getElementById('zoneId').value;
+        const btn = document.getElementById('btnBuy');
+        
+        if(selProduct) {
+            document.getElementById('displayTotal').innerText = `Rp ${selProduct.price.toLocaleString('id-ID')}`;
+        }
+        
+        const isValid = (uid.trim().length > 4 && zid.trim().length >= 2 && selProduct && selMethod);
+        btn.disabled = !isValid;
+        if(isValid) btn.classList.add('btn-active'); else btn.classList.remove('btn-active');
+    }
+
+    function showModal() {
+        const uid = document.getElementById('userId').value;
+        const zid = document.getElementById('zoneId').value;
+        document.getElementById('confirmData').innerHTML = `
+            <div class="confirm-item"><strong>Player ID</strong><span>${uid} (${zid})</span></div>
+            <div class="confirm-item"><strong>Nominal</strong><span>${selProduct.dia} Diamonds</span></div>
+            <div class="confirm-item"><strong>Metode</strong><span>${selMethod}</span></div>
+            <div class="confirm-item" style="border:none;"><strong style="font-size:1.2rem;">Total</strong><span style="color:var(--primary); font-size:1.5rem;">Rp ${selProduct.price.toLocaleString('id-ID')}</span></div>
+        `;
+        document.getElementById('overlay').style.display = 'flex';
+    }
+
+    function processOrder() {
+        const uid = document.getElementById('userId').value;
+        const zid = document.getElementById('zoneId').value;
+        const text = `*ORDER MLBB NEVN STORE*\n\nID: ${uid}\nServer: ${zid}\nOrder: ${selProduct.dia} Diamond\nMetode: ${selMethod}\nTotal: Rp ${selProduct.price.toLocaleString('id-ID')}`;
+        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`);
+    }
+
+    function closeModal() { document.getElementById('overlay').style.display = 'none'; }
+
+    // Admin Access via Logo
+    document.getElementById('mainLogo').onclick = () => {
+        adminClicks++;
+        if(adminClicks >= 5) {
+            const pass = prompt("Admin Password:");
+            if(pass === SECRET_PASSWORD) {
+                document.getElementById('adminPanel').style.display = 'block';
+                const list = document.getElementById('adminList');
+                list.innerHTML = '';
+                dbDiamond.forEach((item, idx) => {
+                    list.innerHTML += `<div style="margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+                        <span>${item.dia} 💎</span>
+                        <input type="number" class="adm-p" data-idx="${idx}" value="${item.price}" style="width:120px; padding:10px; border-radius:10px; background:#111; color:white; border:1px solid #333;">
+                    </div>`;
+                });
+            }
+            adminClicks = 0;
+        }
+    };
+
+    function saveAdmin() {
+        const inputs = document.querySelectorAll('.adm-p');
+        inputs.forEach(inp => {
+            const val = parseInt(inp.value);
+            if(!isNaN(val)) {
+                dbDiamond[inp.dataset.idx].price = val;
+            }
+        });
+        localStorage.setItem('nevn_store_v4', JSON.stringify(dbDiamond));
+        alert("Harga diperbarui!");
+        location.reload();
+    }
+    
+    function closeAdmin() { document.getElementById('adminPanel').style.display = 'none'; }
+
+    // Event Listeners
+    document.getElementById('userId').oninput = validate;
+    document.getElementById('zoneId').oninput = validate;
+    
+    // Start!
+    init();
+</script>
+
+</body>
+</html>
